@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User {
 
@@ -22,23 +22,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Email is required.")
+    @NotBlank(message = "Email is required")
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "password is required.")
+    @NotBlank(message = "Password is required")
     private String password;
     private String firstName;
     private String lastName;
 
-    @NotBlank(message = "phoneNumber is required.")
+    @NotBlank(message = "phoneNumber is required")
     @Column(name = "phone_number")
     private String phoneNumber;
 
-
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
     private boolean active;
+
     private final LocalDate createdAt = LocalDate.now();
 
 }

@@ -1,5 +1,5 @@
 package com.example.HotelBooking.enums;
 
 public enum PaymentStatus {
-    PENDING, COMPLETED, FAILED, REFUNDED,REVERSED
+    PENDING, COMPLETED, FAILED, REFUNDED, REVERSED
 }

@@ -1,8 +1,9 @@
-package com.example.HotelBooking.entities;
+package com.example.HotelBooking.dtos;
 
 import com.example.HotelBooking.enums.PaymentGateway;
 import com.example.HotelBooking.enums.PaymentStatus;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,36 +12,30 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "payments")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentEntity {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PaymentDTO {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private BookingDTO booking;
 
     private String transactionId;
+
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentGateway paymentGateway;
+    private PaymentGateway paymentMethod; //e,g Paypal. Stripe, paystack
 
     private LocalDateTime paymentDate;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
+    private PaymentStatus status; //failed, e.t.c
+
     private String bookingReference;
     private String failureReason;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-
+    private String approvalLink; //paypal payment approval UEL
 
 }

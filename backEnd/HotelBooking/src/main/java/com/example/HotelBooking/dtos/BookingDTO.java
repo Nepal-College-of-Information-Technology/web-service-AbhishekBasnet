@@ -1,8 +1,10 @@
-package com.example.HotelBooking.entities;
+package com.example.HotelBooking.dtos;
+
 
 import com.example.HotelBooking.enums.BookingStatus;
 import com.example.HotelBooking.enums.PaymentStatus;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,28 +13,22 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "bookings")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Booking {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class BookingDTO {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id")
-    private User user;
+    private UserDTO user;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "room_id")
-    private Room room;
+    private RoomDTO room;
+    private Long roomId;
 
-    @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
     private LocalDate checkInDate;
@@ -42,10 +38,7 @@ public class Booking {
     private String bookingReference;
     private LocalDate createdAt;
 
-    @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
-
-
 
 
 }

@@ -1,5 +1,5 @@
 package com.example.HotelBooking.enums;
 
 public enum PaymentGateway {
-    STRIPE, ESEWA, IME
+    PAYPAL, STRIPE, PAYSTACK
 }
