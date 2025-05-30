@@ -1,6 +1,7 @@
 package com.example.nobsv2.product;
 
 import com.example.nobsv2.product.model.Product;
+import com.example.nobsv2.product.model.ProductDTO;
 import com.example.nobsv2.product.services.CreateProductService;
 import com.example.nobsv2.product.services.DeleteProductService;
 import com.example.nobsv2.product.services.GetProductsSercice;
@@ -32,9 +33,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createProduct(){
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody Product product){
 
-        return createProductService.execute(null);
+        return createProductService.execute(product);
     }
 
 
