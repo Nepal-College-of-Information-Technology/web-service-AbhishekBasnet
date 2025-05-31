@@ -21,7 +21,7 @@ public class CreateProductService implements Command<Product, ProductDTO> {
     public ResponseEntity<ProductDTO> execute(Product product) {
         Product savedProduct = productRepository.save(product);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Product Created");
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ProductDTO(savedProduct));
     }
 }
 
