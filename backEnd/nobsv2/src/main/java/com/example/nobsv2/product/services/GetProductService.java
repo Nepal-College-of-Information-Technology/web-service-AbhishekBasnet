@@ -4,9 +4,10 @@ import com.example.nobsv2.product.Query;
 import com.example.nobsv2.product.model.Product;
 import com.example.nobsv2.product.model.ProductDTO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class GetProductService implements Query<Integer, ProductDTO> {
 
     private final ProductRepository productRepository;
