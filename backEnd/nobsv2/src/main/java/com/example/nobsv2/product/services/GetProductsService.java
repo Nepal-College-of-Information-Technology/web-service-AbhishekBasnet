@@ -2,6 +2,7 @@ package com.example.nobsv2.product.services;
 
 import com.example.nobsv2.product.Query;
 import com.example.nobsv2.product.model.Product;
+import com.example.nobsv2.product.model.ProductDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,19 +10,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GetProductsSercice implements Query<Void, List<Product>> {
+public class GetProductsService implements Query<Void, List<ProductDTO>> {
 
 
     private final ProductRepository productRepository;
 
-    public GetProductsSercice(ProductRepository productRepository) {
+    public GetProductsService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     @Override
-    public ResponseEntity<List<Product>> execute(Void input) {
+    public ResponseEntity<List<ProductDTO>> execute(Void input) {
         List<Product> products = productRepository.findAll();
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(products);
+        List<ProductDTO> productDTOs = products.stream().map(ProductDTO::new).toList();
+        return ResponseEntity.status(HttpStatus.OK).body(productDTOs);
     }
 }
