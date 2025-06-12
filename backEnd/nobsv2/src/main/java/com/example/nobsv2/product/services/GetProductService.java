@@ -1,5 +1,6 @@
 package com.example.nobsv2.product.services;
 
+import com.example.nobsv2.exceptions.ProductNotFoundException;
 import com.example.nobsv2.product.Query;
 import com.example.nobsv2.product.model.Product;
 import com.example.nobsv2.product.model.ProductDTO;
@@ -18,9 +19,14 @@ public class GetProductService implements Query<Integer, ProductDTO> {
 
     @Override
     public ResponseEntity<ProductDTO> execute(Integer input) {
-
         Optional<Product> productOptional = productRepository.findById(input);
+        if (productOptional.isPresent()) {
+            return ResponseEntity.ok(new ProductDTO(productOptional.get()));
+        }
 
-        return productOptional.map(product -> ResponseEntity.ok(new ProductDTO(product))).orElse(null);
+        throw new ProductNotFoundException();
     }
+
+
+
 }

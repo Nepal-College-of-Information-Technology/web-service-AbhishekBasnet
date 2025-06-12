@@ -1,5 +1,6 @@
 package com.example.nobsv2.product.services;
 
+import com.example.nobsv2.exceptions.ProductNotFoundException;
 import com.example.nobsv2.product.Query;
 import com.example.nobsv2.product.model.Product;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,6 @@ public class DeleteProductService implements Query<Integer, Void> {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         //later throw exception
-        return null;
+        throw new ProductNotFoundException();
     }
 }
